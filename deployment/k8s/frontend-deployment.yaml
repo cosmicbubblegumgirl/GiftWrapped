@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: giftwrapped-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: giftwrapped-frontend
+  template:
+    metadata:
+      labels:
+        app: giftwrapped-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: giftwrapped-frontend:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REACT_APP_API_URL
+              value: http://giftwrapped-backend:5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: giftwrapped-frontend
+spec:
+  selector:
+    app: giftwrapped-frontend
+  ports:
+    - port: 3000
+      targetPort: 3000
