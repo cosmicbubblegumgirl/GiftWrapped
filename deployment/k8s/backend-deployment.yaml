@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: giftwrapped-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: giftwrapped-backend
+  template:
+    metadata:
+      labels:
+        app: giftwrapped-backend
+    spec:
+      containers:
+        - name: backend
+          image: giftwrapped-backend:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: PORT
+              value: "5000"
+            - name: MONGO_URI
+              value: mongodb://giftwrapped-mongo:27017/giftwrapped
+            - name: JWT_SECRET
+              value: super-secret-key
+            - name: FRONTEND_URL
+              value: "*"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: giftwrapped-backend
+spec:
+  selector:
+    app: giftwrapped-backend
+  ports:
+    - port: 5000
+      targetPort: 5000
