@@ -18,7 +18,21 @@ const port = process.env.PORT || 5000;
 const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
 
 app.use(cors({
-  origin: frontendUrl === '*' ? true : frontendUrl,
+  origin: (origin, callback) => {
+    if (!origin || frontendUrl === '*') {
+      return callback(null, true);
+    }
+
+    const allowedOrigin = origin === frontendUrl;
+    const localhostOrigin = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin);
+    const codespacesOrigin = /^https:\/\/.+\.app\.github\.dev$/i.test(origin);
+
+    if (allowedOrigin || localhostOrigin || codespacesOrigin) {
+      return callback(null, true);
+    }
+
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
 app.use(express.json({ limit: '5mb' }));
