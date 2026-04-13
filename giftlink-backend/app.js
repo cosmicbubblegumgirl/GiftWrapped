@@ -3,14 +3,15 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+
+dotenv.config();
+
 const giftRoutes = require('./routes/giftRoutes');
 const searchRoutes = require('./routes/searchRoutes');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const logger = require('./logger');
 const { connectToDatabase } = require('./models/db');
-
-dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
