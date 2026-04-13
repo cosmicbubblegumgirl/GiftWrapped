@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "lint": "node -e "console.log('backend lint placeholder passed')"",
+    "lint": "node -e \"console.log('backend lint placeholder passed')\"",
     "seed:16": "node scripts/seedMongo16.js",
     "seed:all": "node scripts/seedAll.js"
   },
