@@ -17,7 +17,9 @@ const { connectToDatabase } = require('./models/db');
 
 const app = express();
 const port = process.env.PORT || 5000;
+const nodeEnv = process.env.NODE_ENV || 'development';
 const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+const githubPagesOrigin = 'https://cosmicbubblegumgirl.github.io';
 const frontendBuildPath = path.join(__dirname, '..', 'giftlink-frontend', 'build');
 const hasFrontendBuild = fs.existsSync(frontendBuildPath);
 
@@ -27,7 +29,7 @@ app.use(cors({
       return callback(null, true);
     }
 
-    const allowedOrigin = origin === frontendUrl;
+    const allowedOrigin = origin === frontendUrl || origin === githubPagesOrigin;
     const localhostOrigin = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin);
     const codespacesOrigin = /^https:\/\/.+\.app\.github\.dev$/i.test(origin);
 
@@ -40,7 +42,7 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json({ limit: '5mb' }));
-app.use(morgan('dev'));
+app.use(morgan(nodeEnv === 'production' ? 'combined' : 'dev'));
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });

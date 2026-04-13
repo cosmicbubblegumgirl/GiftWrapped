@@ -52,6 +52,42 @@ npm start
 - Email: `demo@giftwrapped.local`
 - Password: `password123`
 
+## Public deployment
+
+Frontend is designed to publish at `https://cosmicbubblegumgirl.github.io/` and call a public HTTPS backend.
+
+### 1) Configure GitHub secrets and variable in `GiftWrapped`
+
+- `USER_SITE_DEPLOY_TOKEN`: Classic PAT with repo write access to `cosmicbubblegumgirl/cosmicbubblegumgirl.github.io`
+- `REACT_APP_API_URL`: Public Render backend URL (for example `https://giftwrapped-api.onrender.com`)
+- Repository variable `USER_SITE_REPO`: `cosmicbubblegumgirl/cosmicbubblegumgirl.github.io`
+
+### 2) Enable frontend deployment workflow
+
+The workflow at `.github/workflows/deploy-frontend-user-site.yml` builds `giftlink-frontend` and publishes the build output into the root of the user-site repository.
+
+Trigger options:
+
+- push changes under `giftlink-frontend/**` to `main`
+- run `workflow_dispatch` manually from Actions
+
+### 3) Deploy backend on Render
+
+Set these environment variables on Render:
+
+- `NODE_ENV=production`
+- `PORT=5000`
+- `MONGO_URI=<your-mongodb-uri>`
+- `DB_NAME=giftwrapped`
+- `JWT_SECRET=<long-random-secret>`
+- `FRONTEND_URL=https://cosmicbubblegumgirl.github.io`
+
+After deploying, verify:
+
+- `GET /health` returns `200`
+- login/register flow succeeds from the live frontend
+- browser requests are HTTPS-only with no CORS errors
+
 ## Submission help
 
 Open the docs in `/submission` for:

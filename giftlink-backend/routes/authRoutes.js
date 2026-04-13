@@ -10,13 +10,19 @@ const { protect } = require('../middleware/authMiddleware');
 const router = express.Router();
 
 function signToken(user) {
+  const jwtSecret = process.env.JWT_SECRET;
+
+  if (!jwtSecret) {
+    throw new Error('JWT_SECRET env var is required.');
+  }
+
   return jwt.sign(
     {
       id: String(user._id || user.id || user.email),
       email: user.email,
       name: user.name
     },
-    process.env.JWT_SECRET || 'super-secret-key',
+    jwtSecret,
     { expiresIn: '7d' }
   );
 }

@@ -10,7 +10,13 @@ function protect(req, res, next) {
   }
 
   try {
-    req.user = jwt.verify(token, process.env.JWT_SECRET || 'super-secret-key');
+    const jwtSecret = process.env.JWT_SECRET;
+
+    if (!jwtSecret) {
+      throw new Error('JWT_SECRET env var is required.');
+    }
+
+    req.user = jwt.verify(token, jwtSecret);
     return next();
   } catch (error) {
     return res.status(401).json({ error: 'Invalid token.' });
