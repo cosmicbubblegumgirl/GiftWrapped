@@ -303,7 +303,7 @@
 
 .gift-card__image-shell {
   position: relative;
-  min-height: 280px;
+  min-height: 320px;
   border-radius: 24px;
   overflow: hidden;
   background: linear-gradient(180deg, rgba(255,248,232,0.94), rgba(245,243,255,0.92));
@@ -312,42 +312,43 @@
 .gift-card__image-link {
   display: block;
   position: relative;
-  min-height: 280px;
+  min-height: 320px;
   text-decoration: none;
 }
 
 .gift-card__image {
   position: absolute;
-  inset: 18px;
-  width: calc(100% - 36px);
-  height: calc(100% - 36px);
+  inset: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
   object-fit: cover;
-  border-radius: 18px;
-  transform: scale(0.92);
-  transition: transform 320ms ease, filter 320ms ease;
+  border-radius: 20px;
+  transform: scale(1.02);
+  transform-origin: center;
+  transition: transform 320ms ease, filter 320ms ease, opacity 320ms ease;
   z-index: 1;
 }
 
 .gift-card__wrap-box,
 .gift-card__wrap-lid {
   position: absolute;
-  left: 10%;
-  width: 80%;
-  background: linear-gradient(180deg, #fffaf2, #f8ede9);
-  border-radius: 18px;
+  left: 8%;
+  width: 84%;
+  background: linear-gradient(180deg, rgba(255,250,242,0.98), rgba(248,237,233,0.95));
+  border-radius: 20px;
   transition: transform 360ms ease, opacity 320ms ease;
   z-index: 3;
   box-shadow: 0 18px 30px rgba(57, 43, 68, 0.18);
 }
 
 .gift-card__wrap-box {
-  bottom: 24px;
-  height: 52%;
+  bottom: 22px;
+  height: 48%;
 }
 
 .gift-card__wrap-lid {
-  top: 30px;
-  height: 30%;
+  top: 18px;
+  height: 26%;
 }
 
 .gift-card__ribbon {
@@ -358,24 +359,24 @@
 }
 
 .gift-card__ribbon--vertical {
-  top: 24px;
-  bottom: 24px;
-  width: 22px;
-  left: calc(50% - 11px);
+  top: 18px;
+  bottom: 18px;
+  width: 20px;
+  left: calc(50% - 10px);
   border-radius: 999px;
 }
 
 .gift-card__ribbon--horizontal {
-  left: 10%;
-  right: 10%;
-  top: 46%;
-  height: 22px;
+  left: 8%;
+  right: 8%;
+  top: 44%;
+  height: 20px;
   border-radius: 999px;
 }
 
 .gift-card__bow {
   position: absolute;
-  top: 10px;
+  top: 6px;
   left: calc(50% - 24px);
   z-index: 5;
   font-size: 2rem;
@@ -384,8 +385,8 @@
 
 .gift-card__hover-label {
   position: absolute;
-  right: 16px;
-  bottom: 16px;
+  right: 14px;
+  bottom: 14px;
   z-index: 6;
   padding: 0.45rem 0.7rem;
   border-radius: 999px;
@@ -394,32 +395,45 @@
   font-size: 0.78rem;
 }
 
-.gift-card:hover .gift-card__wrap-lid {
-  transform: translateY(-46px) rotate(-5deg);
+.gift-card:hover .gift-card__wrap-lid,
+.gift-card--unwrapped .gift-card__wrap-lid,
+.gift-card__image-link--unwrapped .gift-card__wrap-lid {
+  transform: translateY(-84px) rotate(-8deg);
+  opacity: 0.12;
 }
 
-.gift-card:hover .gift-card__wrap-box {
-  transform: translateY(12px);
-  opacity: 0.55;
+.gift-card:hover .gift-card__wrap-box,
+.gift-card--unwrapped .gift-card__wrap-box,
+.gift-card__image-link--unwrapped .gift-card__wrap-box {
+  transform: translateY(22px) scale(1.02);
+  opacity: 0.12;
 }
 
-.gift-card:hover .gift-card__ribbon--vertical {
-  transform: translateY(-18px) scaleY(0.72);
-  opacity: 0.26;
+.gift-card:hover .gift-card__ribbon--vertical,
+.gift-card--unwrapped .gift-card__ribbon--vertical,
+.gift-card__image-link--unwrapped .gift-card__ribbon--vertical {
+  transform: translateY(-36px) scaleY(0.5);
+  opacity: 0;
 }
 
-.gift-card:hover .gift-card__ribbon--horizontal {
-  transform: scaleX(0.72);
-  opacity: 0.2;
+.gift-card:hover .gift-card__ribbon--horizontal,
+.gift-card--unwrapped .gift-card__ribbon--horizontal,
+.gift-card__image-link--unwrapped .gift-card__ribbon--horizontal {
+  transform: scaleX(0.45);
+  opacity: 0;
 }
 
-.gift-card:hover .gift-card__bow {
-  transform: translateY(-18px) rotate(10deg);
-  opacity: 0.45;
+.gift-card:hover .gift-card__bow,
+.gift-card--unwrapped .gift-card__bow,
+.gift-card__image-link--unwrapped .gift-card__bow {
+  transform: translateY(-30px) rotate(12deg);
+  opacity: 0;
 }
 
-.gift-card:hover .gift-card__image {
-  transform: scale(1);
+.gift-card:hover .gift-card__image,
+.gift-card--unwrapped .gift-card__image,
+.gift-card__image-link--unwrapped .gift-card__image {
+  transform: scale(1.1);
   filter: saturate(1.08);
 }
 

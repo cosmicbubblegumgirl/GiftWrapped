@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 function GiftCard({ gift, onToggleWishlist, isWishlisted = false }) {
   const [wishlisted, setWishlisted] = useState(isWishlisted);
+  const [unwrapped, setUnwrapped] = useState(false);
 
   function handleWishlist() {
     const next = !wishlisted;
@@ -13,20 +14,26 @@ function GiftCard({ gift, onToggleWishlist, isWishlisted = false }) {
   }
 
   return (
-    <article className="gift-card card-panel">
+    <article className={`gift-card card-panel ${unwrapped ? 'gift-card--unwrapped' : ''}`}>
       <div className="gift-card__image-shell">
         <button className="wishlist-button" onClick={handleWishlist} type="button">
           {wishlisted ? '♥' : '♡'}
         </button>
 
-        <Link to={`/gifts/${gift.id}`} className="gift-card__image-link">
+        <Link
+          to={`/gifts/${gift.id}`}
+          className={`gift-card__image-link ${unwrapped ? 'gift-card__image-link--unwrapped' : ''}`}
+          onMouseEnter={() => setUnwrapped(true)}
+          onFocus={() => setUnwrapped(true)}
+          aria-label={`View ${gift.name}`}
+        >
           <div className="gift-card__wrap-lid" />
           <div className="gift-card__wrap-box" />
           <div className="gift-card__ribbon gift-card__ribbon--vertical" />
           <div className="gift-card__ribbon gift-card__ribbon--horizontal" />
           <div className="gift-card__bow">🎀</div>
           <img src={gift.image} alt={gift.name} className="gift-card__image" />
-          <div className="gift-card__hover-label">Hover to unwrap</div>
+          <div className="gift-card__hover-label">{unwrapped ? 'Unwrapped' : 'Hover to unwrap'}</div>
         </Link>
       </div>
 

@@ -148,7 +148,8 @@ const gifts = [];
 
 themes.forEach((theme, themeIndex) => {
   descriptors.forEach((descriptor, descriptorIndex) => {
-    const name = `${descriptor} ${theme.items[descriptorIndex % theme.items.length]}`;
+    const itemType = theme.items[descriptorIndex % theme.items.length];
+    const name = `${descriptor} ${itemType}`;
     const recipient = theme.recipients[descriptorIndex % theme.recipients.length];
     const occasion = theme.occasions[descriptorIndex % theme.occasions.length];
     const price = Number((18 + themeIndex * 4.5 + descriptorIndex * 2.15).toFixed(2));
@@ -161,6 +162,7 @@ themes.forEach((theme, themeIndex) => {
       id,
       name,
       category: theme.category,
+      itemType,
       recipient,
       occasion,
       price,
@@ -169,13 +171,14 @@ themes.forEach((theme, themeIndex) => {
       image: makeGiftImage({
         title: name,
         category: theme.category,
+        itemType,
         icon: theme.icon,
         accent: theme.accent,
         wrap: theme.wrap,
         ribbon: theme.ribbon
       }),
       description: `${name} is a whimsical ${theme.category.toLowerCase()} gift designed for ${recipient}. It blends practical charm, wrapped-up delight, and celebratory details that make it perfect for ${occasion}.`,
-      tags: [descriptor.toLowerCase(), theme.category.toLowerCase(), recipient, occasion, 'giftwrapped'],
+      tags: [descriptor.toLowerCase(), theme.category.toLowerCase(), itemType.toLowerCase(), recipient, occasion, 'giftwrapped'],
       colors: [
         colors[themeIndex % colors.length],
         colors[(themeIndex + 2) % colors.length],
