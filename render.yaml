@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: giftwrapped-backend
+    runtime: node
+    rootDir: giftlink-backend
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: DB_NAME
+        value: giftwrapped
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        value: https://cosmicbubblegumgirl.github.io

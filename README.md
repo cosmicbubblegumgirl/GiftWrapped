@@ -73,6 +73,8 @@ Trigger options:
 
 ### 3) Deploy backend on Render
 
+This repo includes `render.yaml` so you can create the backend service from blueprint.
+
 Set these environment variables on Render:
 
 - `NODE_ENV=production`
