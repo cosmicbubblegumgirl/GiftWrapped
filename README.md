@@ -54,22 +54,22 @@ npm start
 
 ## Public deployment
 
-Frontend is designed to publish at `https://cosmicbubblegumgirl.github.io/` and call a public HTTPS backend.
+Frontend is designed to publish at `https://cosmicbubblegumgirl.github.io/GiftWrapped` and call a public HTTPS backend.
 
-### 1) Configure GitHub secrets and variable in `GiftWrapped`
+### 1) Configure GitHub secrets in `GiftWrapped`
 
-- `USER_SITE_DEPLOY_TOKEN`: Classic PAT with repo write access to `cosmicbubblegumgirl/cosmicbubblegumgirl.github.io`
 - `REACT_APP_API_URL`: Public Render backend URL (for example `https://giftwrapped-api.onrender.com`)
-- Repository variable `USER_SITE_REPO`: `cosmicbubblegumgirl/cosmicbubblegumgirl.github.io`
 
 ### 2) Enable frontend deployment workflow
 
-The workflow at `.github/workflows/deploy-frontend-user-site.yml` builds `giftlink-frontend` and publishes the build output into the root of the user-site repository.
+The workflow at `.github/workflows/deploy-frontend-gh-pages.yml` builds `giftlink-frontend` and publishes the build output to the `gh-pages` branch of this repository.
 
 Trigger options:
 
 - push changes under `giftlink-frontend/**` to `main`
 - run `workflow_dispatch` manually from Actions
+
+After the first successful workflow run, set GitHub Pages source to `gh-pages` branch in repository settings.
 
 ### 3) Deploy backend on Render
 
