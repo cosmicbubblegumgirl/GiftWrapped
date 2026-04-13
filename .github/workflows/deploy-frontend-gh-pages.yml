@@ -1,0 +1,49 @@
+name: Deploy Frontend to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - giftlink-frontend/**
+      - .github/workflows/deploy-frontend-gh-pages.yml
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout GiftWrapped
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: giftlink-frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: giftlink-frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: giftlink-frontend
+        env:
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${REACT_APP_API_URL:-}" ]]; then
+            echo "REACT_APP_API_URL secret is required"
+            exit 1
+          fi
+          npm run build
+
+      - name: Publish to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./giftlink-frontend/build
+          force_orphan: true
