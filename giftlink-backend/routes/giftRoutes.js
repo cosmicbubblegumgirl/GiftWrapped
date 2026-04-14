@@ -40,7 +40,9 @@ router.get('/:id', async (req, res, next) => {
       }
     }
 
-    const gift = giftStore.find((item) => String(item.id) === String(requestedId));
+    const gift = giftStore.find(
+      (item) => String(item.id) === String(requestedId)
+    );
 
     if (!gift) {
       return res.status(404).json({ error: 'Gift not found' });
