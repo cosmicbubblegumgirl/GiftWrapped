@@ -1,80 +1,134 @@
-export const fallbackGifts = [
+import { makeGiftImage } from './makeGiftImage';
+
+const descriptors = [
+  'Starlit', 'Ribboned', 'Moonbeam', 'Velvet', 'Sparkle',
+  'Tinsel', 'Keepsake', 'Twinkle', 'Fable', 'Darling',
+  'Merry', 'Whisper', 'Dewdrop', 'Petal', 'Gilded'
+];
+
+const themes = [
   {
-    id: 'gift-001',
-    name: 'Starlit Candle Set',
-    category: 'Cozy Home',
-    recipient: 'homebodies',
-    occasion: 'housewarmings',
-    price: 24.99,
-    rating: 4.7,
-    stock: 16,
-    image: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&w=900&q=80',
-    description: 'A warm blend of candles and cozy accents for relaxing evenings.',
-    tags: ['starlit', 'cozy home', 'candle set', 'homebodies', 'housewarmings', 'giftwrapped']
+    category: 'Cozy Home', icon: '🕯️', wrap: '#fff2e5', ribbon: '#b23a48', accent: '#f2c94c',
+    items: ['Candle Set', 'Knit Throw', 'Ceramic Mug'],
+    recipients: ['homebodies', 'roommates', 'new homeowners'],
+    occasions: ['housewarmings', 'winter birthdays', 'thank-you gifts']
   },
   {
-    id: 'gift-002',
-    name: 'Ribboned Planner Bundle',
-    category: 'Desk Delight',
-    recipient: 'students',
-    occasion: 'graduations',
-    price: 29.5,
-    rating: 4.5,
-    stock: 22,
-    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80',
-    description: 'Planner, pens, and desk extras for organized gifting moments.',
-    tags: ['ribboned', 'desk delight', 'planner bundle', 'students', 'graduations', 'giftwrapped']
+    category: 'Desk Delight', icon: '🖋️', wrap: '#f6efff', ribbon: '#7b5ea7', accent: '#f2c94c',
+    items: ['Planner Bundle', 'Pen Set', 'Desktop Tray'],
+    recipients: ['students', 'teachers', 'coworkers'],
+    occasions: ['graduations', 'new jobs', 'study milestones']
   },
   {
-    id: 'gift-003',
-    name: 'Moonbeam Spa Box',
-    category: 'Self-Care',
-    recipient: 'best friends',
-    occasion: 'birthdays',
-    price: 34.0,
-    rating: 4.8,
-    stock: 14,
-    image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=80',
-    description: 'A calming self-care set with gentle scents and comfort essentials.',
-    tags: ['moonbeam', 'self-care', 'spa box', 'best friends', 'birthdays', 'giftwrapped']
+    category: 'Self-Care', icon: '🛁', wrap: '#fef4f8', ribbon: '#d16b86', accent: '#f2c94c',
+    items: ['Spa Box', 'Silk Sleep Set', 'Bath Ritual Kit'],
+    recipients: ['best friends', 'sisters', 'busy parents'],
+    occasions: ['birthdays', 'care packages', 'rest days']
   },
   {
-    id: 'gift-004',
-    name: 'Velvet Tea Time Set',
-    category: 'Kitchen Joy',
-    recipient: 'hosts',
-    occasion: 'bridal showers',
-    price: 31.25,
-    rating: 4.4,
-    stock: 19,
-    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80',
-    description: 'A charming tea-inspired gift set for warm gatherings and hosts.',
-    tags: ['velvet', 'kitchen joy', 'tea time set', 'hosts', 'bridal showers', 'giftwrapped']
+    category: 'Kitchen Joy', icon: '🍰', wrap: '#fff7df', ribbon: '#d97706', accent: '#7b5ea7',
+    items: ['Recipe Tin', 'Baker Bundle', 'Tea Time Set'],
+    recipients: ['hosts', 'bakers', 'food lovers'],
+    occasions: ['bridal showers', 'housewarmings', 'holiday swaps']
   },
   {
-    id: 'gift-005',
-    name: 'Sparkle Audio Kit',
-    category: 'Tech Trinkets',
-    recipient: 'gamers',
-    occasion: 'upgrades',
-    price: 45.99,
-    rating: 4.6,
-    stock: 11,
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80',
-    description: 'Portable audio accessories bundled for creators and gamers.',
-    tags: ['sparkle', 'tech trinkets', 'audio kit', 'gamers', 'upgrades', 'giftwrapped']
+    category: 'Tech Trinkets', icon: '🎧', wrap: '#eef6ff', ribbon: '#4f46e5', accent: '#f2c94c',
+    items: ['Audio Kit', 'Smart Desk Lamp', 'Cable Organizer'],
+    recipients: ['gamers', 'creators', 'remote workers'],
+    occasions: ['birthdays', 'upgrades', 'work anniversaries']
   },
   {
-    id: 'gift-006',
-    name: 'Tinsel Plant Pot Trio',
-    category: 'Garden Glow',
-    recipient: 'plant parents',
-    occasion: 'welcome gifts',
-    price: 27.75,
-    rating: 4.3,
-    stock: 24,
-    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80',
-    description: 'A set of decorative pots made for bright indoor garden corners.',
-    tags: ['tinsel', 'garden glow', 'plant pot trio', 'plant parents', 'welcome gifts', 'giftwrapped']
+    category: 'Garden Glow', icon: '🌿', wrap: '#effbf1', ribbon: '#2f855a', accent: '#f2c94c',
+    items: ['Plant Pot Trio', 'Seed Starter Set', 'Botanical Journal'],
+    recipients: ['plant parents', 'gardeners', 'nature lovers'],
+    occasions: ['spring gifting', 'welcome gifts', 'celebrations']
+  },
+  {
+    category: 'Reading Nook', icon: '📚', wrap: '#f9f5ef', ribbon: '#6b4f3a', accent: '#7b5ea7',
+    items: ['Book Sleeve', 'Reading Light', 'Bookmark Wallet'],
+    recipients: ['bookworms', 'teens', 'librarians'],
+    occasions: ['exam season', 'birthdays', 'book club swaps']
+  },
+  {
+    category: 'Party Sparkle', icon: '🎉', wrap: '#fff0f5', ribbon: '#db2777', accent: '#f2c94c',
+    items: ['Celebration Box', 'Confetti Kit', 'Mini Photo Booth Set'],
+    recipients: ['party planners', 'friends', 'event hosts'],
+    occasions: ['birthdays', 'engagements', 'surprise parties']
+  },
+  {
+    category: 'Kids Wonder', icon: '🧸', wrap: '#fff8e8', ribbon: '#f59e0b', accent: '#7b5ea7',
+    items: ['Story Play Set', 'Puzzle Pack', 'Creative Box'],
+    recipients: ['kids', 'nieces', 'nephews'],
+    occasions: ['birthdays', 'reward gifts', 'holiday surprises']
+  },
+  {
+    category: 'Pet Parade', icon: '🐾', wrap: '#f5f3ff', ribbon: '#8b5cf6', accent: '#f2c94c',
+    items: ['Pet Pamper Box', 'Treat Jar Set', 'Walking Essentials'],
+    recipients: ['pet parents', 'dog lovers', 'cat lovers'],
+    occasions: ['pet birthdays', 'welcome-home gifts', 'celebrations']
+  },
+  {
+    category: 'Travel Treasure', icon: '🧳', wrap: '#eefaf8', ribbon: '#0f766e', accent: '#f2c94c',
+    items: ['Journey Pouch', 'Travel Journal', 'Passport Wallet'],
+    recipients: ['travelers', 'graduates', 'adventurers'],
+    occasions: ['farewells', 'gap years', 'getaways']
+  },
+  {
+    category: 'Artful Keepsake', icon: '🎨', wrap: '#fff4f0', ribbon: '#c2410c', accent: '#7b5ea7',
+    items: ['Sketch Ritual Set', 'Mini Gallery Frame', 'Creative Prompt Deck'],
+    recipients: ['artists', 'makers', 'dreamers'],
+    occasions: ['creative milestones', 'birthdays', 'thank-you moments']
   }
 ];
+
+const colors = ['Ribbon Red', 'Plum Velvet', 'Lavender Tissue', 'Mint Wrap', 'Champagne Gold', 'Porcelain Cream'];
+
+function generateGifts() {
+  const gifts = [];
+
+  themes.forEach((theme, themeIndex) => {
+    descriptors.forEach((descriptor, descriptorIndex) => {
+      const itemType = theme.items[descriptorIndex % theme.items.length];
+      const name = `${descriptor} ${itemType}`;
+      const recipient = theme.recipients[descriptorIndex % theme.recipients.length];
+      const occasion = theme.occasions[descriptorIndex % theme.occasions.length];
+      const price = Number((18 + themeIndex * 4.5 + descriptorIndex * 2.15).toFixed(2));
+      const rating = Number((4.1 + ((descriptorIndex + themeIndex) % 9) * 0.1).toFixed(1));
+      const stock = 4 + ((themeIndex * 3 + descriptorIndex) % 22);
+      const giftNumber = gifts.length + 1;
+      const id = `gift-${String(giftNumber).padStart(3, '0')}`;
+
+      gifts.push({
+        id,
+        name,
+        category: theme.category,
+        itemType,
+        recipient,
+        occasion,
+        price,
+        rating,
+        stock,
+        image: makeGiftImage({
+          title: name,
+          category: theme.category,
+          itemType,
+          icon: theme.icon,
+          accent: theme.accent,
+          wrap: theme.wrap,
+          ribbon: theme.ribbon
+        }),
+        description: `${name} is a whimsical ${theme.category.toLowerCase()} gift designed for ${recipient}. It blends practical charm, wrapped-up delight, and celebratory details that make it perfect for ${occasion}.`,
+        tags: [descriptor.toLowerCase(), theme.category.toLowerCase(), itemType.toLowerCase(), recipient, occasion, 'giftwrapped'],
+        colors: [
+          colors[themeIndex % colors.length],
+          colors[(themeIndex + 2) % colors.length],
+          colors[(descriptorIndex + 1) % colors.length]
+        ]
+      });
+    });
+  });
+
+  return gifts;
+}
+
+export const fallbackGifts = generateGifts();
