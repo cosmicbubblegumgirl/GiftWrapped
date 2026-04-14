@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import config from '../../config';
+import { api } from '../../lib/api';
 import { useAuth } from '../../context/AuthContext';
 
 function LoginPage() {
@@ -15,20 +15,7 @@ function LoginPage() {
 
     try {
       const authToken = token || '';
-      const response = await fetch(`${config.API_URL}/api/auth/login`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          Authorization: authToken ? `Bearer ${authToken}` : ''
-        },
-        body: JSON.stringify(form)
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Login failed');
-      }
+      const data = await api.post('/api/auth/login', form, authToken);
 
       finishAuth(data);
       navigate('/profile');

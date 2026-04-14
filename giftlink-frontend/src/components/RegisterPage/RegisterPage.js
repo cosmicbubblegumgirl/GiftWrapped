@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import config from '../../config';
+import { api } from '../../lib/api';
 import { useAuth } from '../../context/AuthContext';
 
 function RegisterPage() {
@@ -14,19 +14,7 @@ function RegisterPage() {
     setError('');
 
     try {
-      const response = await fetch(`${config.API_URL}/api/auth/register`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(form)
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Registration failed');
-      }
+      const data = await api.post('/api/auth/register', form);
 
       finishAuth(data);
       navigate('/profile');
