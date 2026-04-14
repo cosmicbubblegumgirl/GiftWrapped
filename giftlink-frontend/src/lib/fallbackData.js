@@ -1,0 +1,80 @@
+export const fallbackGifts = [
+  {
+    id: 'gift-001',
+    name: 'Starlit Candle Set',
+    category: 'Cozy Home',
+    recipient: 'homebodies',
+    occasion: 'housewarmings',
+    price: 24.99,
+    rating: 4.7,
+    stock: 16,
+    image: 'https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&w=900&q=80',
+    description: 'A warm blend of candles and cozy accents for relaxing evenings.',
+    tags: ['starlit', 'cozy home', 'candle set', 'homebodies', 'housewarmings', 'giftwrapped']
+  },
+  {
+    id: 'gift-002',
+    name: 'Ribboned Planner Bundle',
+    category: 'Desk Delight',
+    recipient: 'students',
+    occasion: 'graduations',
+    price: 29.5,
+    rating: 4.5,
+    stock: 22,
+    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80',
+    description: 'Planner, pens, and desk extras for organized gifting moments.',
+    tags: ['ribboned', 'desk delight', 'planner bundle', 'students', 'graduations', 'giftwrapped']
+  },
+  {
+    id: 'gift-003',
+    name: 'Moonbeam Spa Box',
+    category: 'Self-Care',
+    recipient: 'best friends',
+    occasion: 'birthdays',
+    price: 34.0,
+    rating: 4.8,
+    stock: 14,
+    image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=80',
+    description: 'A calming self-care set with gentle scents and comfort essentials.',
+    tags: ['moonbeam', 'self-care', 'spa box', 'best friends', 'birthdays', 'giftwrapped']
+  },
+  {
+    id: 'gift-004',
+    name: 'Velvet Tea Time Set',
+    category: 'Kitchen Joy',
+    recipient: 'hosts',
+    occasion: 'bridal showers',
+    price: 31.25,
+    rating: 4.4,
+    stock: 19,
+    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80',
+    description: 'A charming tea-inspired gift set for warm gatherings and hosts.',
+    tags: ['velvet', 'kitchen joy', 'tea time set', 'hosts', 'bridal showers', 'giftwrapped']
+  },
+  {
+    id: 'gift-005',
+    name: 'Sparkle Audio Kit',
+    category: 'Tech Trinkets',
+    recipient: 'gamers',
+    occasion: 'upgrades',
+    price: 45.99,
+    rating: 4.6,
+    stock: 11,
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80',
+    description: 'Portable audio accessories bundled for creators and gamers.',
+    tags: ['sparkle', 'tech trinkets', 'audio kit', 'gamers', 'upgrades', 'giftwrapped']
+  },
+  {
+    id: 'gift-006',
+    name: 'Tinsel Plant Pot Trio',
+    category: 'Garden Glow',
+    recipient: 'plant parents',
+    occasion: 'welcome gifts',
+    price: 27.75,
+    rating: 4.3,
+    stock: 24,
+    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80',
+    description: 'A set of decorative pots made for bright indoor garden corners.',
+    tags: ['tinsel', 'garden glow', 'plant pot trio', 'plant parents', 'welcome gifts', 'giftwrapped']
+  }
+];
