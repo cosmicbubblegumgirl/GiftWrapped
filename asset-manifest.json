@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/GiftWrapped/static/css/main.22148c64.css",
+    "main.js": "/GiftWrapped/static/js/main.cf5340a1.js",
+    "index.html": "/GiftWrapped/index.html",
+    "main.22148c64.css.map": "/GiftWrapped/static/css/main.22148c64.css.map",
+    "main.cf5340a1.js.map": "/GiftWrapped/static/js/main.cf5340a1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.22148c64.css",
+    "static/js/main.cf5340a1.js"
+  ]
+}
