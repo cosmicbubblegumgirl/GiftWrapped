@@ -1,5 +1,5 @@
 function resolveApiUrl() {
-  const fromEnv = process.env.https://giftwrapped-backend.onrender.com;
+  const fromEnv = process.env.REACT_APP_API_URL;
 
   if (typeof window !== 'undefined') {
     const { hostname } = window.location;
