@@ -33,13 +33,9 @@ jobs:
       - name: Build frontend
         working-directory: giftlink-frontend
         env:
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL || 'https://giftwrapped-backend.onrender.com' }}
         run: |
           set -euo pipefail
-          if [[ -z "${REACT_APP_API_URL:-}" ]]; then
-            echo "REACT_APP_API_URL secret is required"
-            exit 1
-          fi
           npm run build
 
       - name: Publish to gh-pages branch
