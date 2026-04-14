@@ -62,14 +62,12 @@ Frontend is designed to publish at `https://cosmicbubblegumgirl.github.io/GiftWr
 
 ### 2) Enable frontend deployment workflow
 
-The workflow at `.github/workflows/deploy-frontend-gh-pages.yml` builds `giftlink-frontend` and publishes the build output to the `gh-pages` branch of this repository.
+The workflow at `.github/workflows/static.yml` builds `giftlink-frontend` and publishes the build output using GitHub Pages workflow deployment.
 
 Trigger options:
 
-- push changes under `giftlink-frontend/**` to `main`
+- push changes to `main`
 - run `workflow_dispatch` manually from Actions
-
-After the first successful workflow run, set GitHub Pages source to `gh-pages` branch in repository settings.
 
 ### 3) Deploy backend on Render
 
